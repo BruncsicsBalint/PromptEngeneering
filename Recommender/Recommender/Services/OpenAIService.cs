@@ -29,7 +29,7 @@ namespace Recommender.Services
                 model: Model.DefaultModel, 
                 temperature: 0.2,
                 numOutputs: 1,
-                max_tokens: 100
+                max_tokens: 150
                 ));
 
             return result.Completions[0].Text;

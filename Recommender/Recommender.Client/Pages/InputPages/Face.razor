@@ -1,7 +1,9 @@
 ﻿@page "/face"
+@using Recommender.Client.DTOs
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 @inject NotificationService NotificationService
 @inject ILocalStorageService LocalStorage
+@inject HttpClient Http
 
 <RadzenText TextStyle="TextStyle.H3">Face</RadzenText>
 <RadzenRow Gap="1rem">
@@ -33,8 +35,8 @@
     </RadzenColumn>
     <RadzenColumn Size="12" SizeSM="6">
         <RadzenCard>
-            <RadzenText TextStyle="TextStyle.H3">Result</RadzenText>
-            <RadzenText TextStyle="TextStyle.H4">Your result is:</RadzenText>
+            <RadzenText TextStyle="TextStyle.H3">@ShortFaceEstimate</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">Description:</RadzenText>
             <RadzenText TextStyle="TextStyle.Body1">@FaceEstimate</RadzenText>
         </RadzenCard>
     </RadzenColumn>
@@ -49,11 +51,45 @@
     string ChinT = "";
     string[] ChinShapes = [ "Soft", "Medium", "Sharp"];
 
+
+
     string FaceEstimate = "Not yet estimated";
+    string ShortFaceEstimate = "Estimate";
 
     protected override async Task OnInitializedAsync()
     {
         await LoadDataAsync();
+    }
+
+    private async Task<string> MakePrompt()
+    {    
+        PromptDTO output = new PromptDTO($@"
+Given the following facial measurements:
+- Forehead Width: {ForeheadW} cm
+- Cheekbone Width: {CheekboneW} cm
+- Jaw Width: {JawW} cm
+- Face Length: {FaceH} cm
+- Chin Shape with vales Soft, Medium, Sharp: {ChinT}
+
+Determine the face type and provide relevant style tips. The types are:
+1. Round Face: Characterized by soft, circular features with a width and height that are roughly equal. Full cheeks and a rounded chin with no sharp angles. Tips: hairstyles that add height and slim the face, angular glasses.
+2. Oval Face: Balanced proportions with the forehead slightly wider than the chin. The length of the face is about one and a half times the width. Tips: Most hairstyles, including layers, bangs, or pulled-back styles.
+3. Heart Face: Wider at the forehead, narrowing down towards a pointed chin. High cheekbones and a delicate jawline. Tips: Hairstyles wider at the jawline, rounded glasses.
+4. Square Face: Strong, angular jawline; forehead, cheekbones, and jawline of approximately the same width. Tips: Hairstyles that soften the angles, curls or waves, rounded or oval glasses.
+5. Triangle Face: Jawline wider than the cheekbones, narrow forehead. Tips: Adding volume at the top of the head, high arched eyebrows.
+6. Diamond Face: High cheekbones, narrow forehead and jawline of approximately the same width. Tips: Hairstyles that add width at the chin, soft bangs."
+);
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
+    }
+
+    private async Task<string> GetShortDescription()
+    {
+        PromptDTO output = new PromptDTO($"{FaceEstimate}, From this in a single word what is the face type?");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
     }
 
     private async Task SaveChangesAsync()
@@ -66,8 +102,11 @@
             await LocalStorage.SetItemAsync("FaceH", FaceH);
             await LocalStorage.SetItemAsync("ChinT", ChinT);
 
-            FaceEstimate = $"Forehead Width: {ForeheadW}, Cheekbone Width: {CheekboneW}, Jaw Width: {JawW}, Face Length: {FaceH}, Chin Shape: {ChinT}";
+            FaceEstimate = await MakePrompt();
             await LocalStorage.SetItemAsync("FaceEstimate", FaceEstimate);
+
+            ShortFaceEstimate = await GetShortDescription();
+            await LocalStorage.SetItemAsync("ShortFaceEstimate", ShortFaceEstimate);
         }
         catch (Exception ex)
         {

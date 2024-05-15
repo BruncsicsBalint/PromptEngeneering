@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\inputpages\\face.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\inputpages\\face.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\recommendations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\recommendations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,14 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\controllers\\openaicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\controllers\\openaicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,26 +39,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Program.cs",
-              "RelativeDocumentMoniker": "Recommender\\Recommender\\Program.cs",
-              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Program.cs",
-              "RelativeToolTip": "Recommender\\Recommender\\Program.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T20:53:49.776Z"
+              "Title": "Face.razor",
+              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
+              "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
+              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
+              "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAuwGsAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-15T21:44:20.748Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\appsettings.json",
-              "RelativeDocumentMoniker": "Recommender\\Recommender\\appsettings.json",
-              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\appsettings.json",
-              "RelativeToolTip": "Recommender\\Recommender\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-05-15T20:40:25.536Z"
+              "DocumentIndex": 2,
+              "Title": "Recommendations.razor",
+              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
+              "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
+              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
+              "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-15T16:02:40.563Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -64,13 +70,40 @@
               "RelativeDocumentMoniker": "Recommender\\Recommender\\Services\\OpenAIService.cs",
               "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Services\\OpenAIService.cs",
               "RelativeToolTip": "Recommender\\Recommender\\Services\\OpenAIService.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAB8AAAAfAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAYwB8AAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T20:34:22.605Z"
+              "WhenOpened": "2024-05-15T20:34:22.605Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Program.cs",
+              "RelativeDocumentMoniker": "Recommender\\Recommender\\Program.cs",
+              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Program.cs",
+              "RelativeToolTip": "Recommender\\Recommender\\Program.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-15T20:53:49.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\appsettings.json",
+              "RelativeDocumentMoniker": "Recommender\\Recommender\\appsettings.json",
+              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\appsettings.json",
+              "RelativeToolTip": "Recommender\\Recommender\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-05-15T20:40:25.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "OpenAIController.cs",
               "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Controllers\\OpenAIController.cs",
               "RelativeDocumentMoniker": "Recommender\\Recommender\\Controllers\\OpenAIController.cs",
@@ -78,19 +111,7 @@
               "RelativeToolTip": "Recommender\\Recommender\\Controllers\\OpenAIController.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAQwDsAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-15T19:48:58.433Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Recommendations.razor",
-              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
-              "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
-              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
-              "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
-              "ViewState": "AQIAAGkAAAAAAAAAAAAAAHMAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-15T16:02:40.563Z",
+              "WhenOpened": "2024-05-15T19:48:58.433Z",
               "EditorCaption": ""
             }
           ]

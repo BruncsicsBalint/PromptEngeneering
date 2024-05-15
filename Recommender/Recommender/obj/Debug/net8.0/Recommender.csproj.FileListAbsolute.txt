@@ -62,3 +62,4 @@ C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Reco
 C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender\bin\Debug\net8.0\OpenAI_API.dll
+C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender\obj\Debug\net8.0\Recommender.sourcelink.json

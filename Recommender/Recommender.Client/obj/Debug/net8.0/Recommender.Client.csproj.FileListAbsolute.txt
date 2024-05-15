@@ -1041,3 +1041,4 @@ C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Reco
 C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender.Client\bin\Debug\net8.0\Blazored.LocalStorage.dll
 C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender.Client\obj\Debug\net8.0\webcil\Blazored.LocalStorage.wasm
 C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender.Client\obj\Debug\net8.0\compressed\p80smf2ojs.gz
+C:\Users\BruncsicsBálint\Desktop\Projects\Practice\Recommender\Recommender\Recommender.Client\obj\Debug\net8.0\Recommender.Client.sourcelink.json
