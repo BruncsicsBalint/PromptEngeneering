@@ -1,0 +1,98 @@
+﻿@page "/face"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@inject NotificationService NotificationService
+@inject ILocalStorageService LocalStorage
+
+<RadzenText TextStyle="TextStyle.H3">Face</RadzenText>
+<RadzenRow Gap="1rem">
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenStack>
+
+            <RadzenFormField Text="Forehead Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@ForeheadW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Cheekbone Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@CheekboneW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Jaw Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@JawW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Face Length" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@FaceH" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Chin Shape" Variant="Variant.Flat">
+                <RadzenDropDown Data=@ChinShapes @bind-Value="@ChinT" />
+            </RadzenFormField>
+            <RadzenButton Click=@(args => SaveChangesAsync()) Text="Save and Estimate" ButtonStyle="ButtonStyle.Primary" />
+        
+            </RadzenStack>
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenCard>
+            <RadzenText TextStyle="TextStyle.H3">Result</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">Your result is:</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1">@FaceEstimate</RadzenText>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenComponents />
+
+@code {
+    int ForeheadW = 0;
+    int CheekboneW = 0;
+    int JawW = 0;
+    int FaceH = 0;
+    string ChinT = "";
+    string[] ChinShapes = [ "Soft", "Medium", "Sharp"];
+
+    string FaceEstimate = "Not yet estimated";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task SaveChangesAsync()
+    {
+        try
+        {
+            await LocalStorage.SetItemAsync("ForeheadW", ForeheadW);
+            await LocalStorage.SetItemAsync("CheekboneW", CheekboneW);
+            await LocalStorage.SetItemAsync("JawW", JawW);
+            await LocalStorage.SetItemAsync("FaceH", FaceH);
+            await LocalStorage.SetItemAsync("ChinT", ChinT);
+
+            FaceEstimate = $"Forehead Width: {ForeheadW}, Cheekbone Width: {CheekboneW}, Jaw Width: {JawW}, Face Length: {FaceH}, Chin Shape: {ChinT}";
+            await LocalStorage.SetItemAsync("FaceEstimate", FaceEstimate);
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+    }
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            ForeheadW = await LocalStorage.GetItemAsync<int>("ForeheadW");
+            CheekboneW = await LocalStorage.GetItemAsync<int>("CheekboneW");
+            JawW = await LocalStorage.GetItemAsync<int>("JawW");
+            FaceH = await LocalStorage.GetItemAsync<int>("FaceH");
+            ChinT = await LocalStorage.GetItemAsync<string>("ChinT") ?? "";
+
+            FaceEstimate = await LocalStorage.GetItemAsync<string>("FaceEstimate") ?? "Not yet estimated";
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+    }
+
+}

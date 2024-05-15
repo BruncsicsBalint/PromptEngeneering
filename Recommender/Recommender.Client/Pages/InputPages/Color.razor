@@ -1,0 +1,85 @@
+﻿@page "/color"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@inject NotificationService NotificationService
+@inject ILocalStorageService LocalStorage
+
+<RadzenText TextStyle="TextStyle.H3">Color</RadzenText>
+<RadzenRow Gap="1rem">
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenStack>
+            <RadzenFormField Text="Forehead Color" Variant="Variant.Flat">
+                <RadzenColorPicker @bind-Value="@ForeheadC" />
+            </RadzenFormField>
+            <RadzenFormField Text="Eye Color" Variant="Variant.Flat">
+                <RadzenColorPicker @bind-Value="@EyeC" />
+            </RadzenFormField>
+            <RadzenFormField Text="Hair Color" Variant="Variant.Flat">
+                <RadzenColorPicker @bind-Value="@HairC" />
+            </RadzenFormField>
+            <RadzenFormField Text="FacialHair Color" Variant="Variant.Flat">
+                <RadzenColorPicker @bind-Value="@FacialHairC" />
+            </RadzenFormField>
+            <RadzenButton Click=@(args => SaveChangesAsync()) Text="Save and Estimate" ButtonStyle="ButtonStyle.Primary" />
+        </RadzenStack>
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenCard>
+            <RadzenText TextStyle="TextStyle.H3">Result</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">Your result is:</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1">@ColorEstimate</RadzenText>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenComponents />
+
+@code {
+    string ForeheadC = "";
+    string EyeC = "";
+    string HairC = "";
+    string FacialHairC = "";
+
+    string ColorEstimate = "Not yet estimated";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task SaveChangesAsync()
+    {
+        try
+        {
+            await LocalStorage.SetItemAsync("ForeheadC", ForeheadC);
+            await LocalStorage.SetItemAsync("EyeC", EyeC);
+            await LocalStorage.SetItemAsync("HairC", HairC);
+            await LocalStorage.SetItemAsync("FacialHairC", FacialHairC);
+            
+            ColorEstimate = "Your result is: " + ForeheadC + " " + EyeC + " " + HairC + " " + FacialHairC;
+            await LocalStorage.SetItemAsync("ColorEstimate", ColorEstimate);
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+    }
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            ForeheadC = await LocalStorage.GetItemAsync<string>("ForeheadC") ?? "";
+            EyeC = await LocalStorage.GetItemAsync<string>("EyeC") ?? "";
+            HairC = await LocalStorage.GetItemAsync<string>("HairC") ?? "";
+            FacialHairC = await LocalStorage.GetItemAsync<string>("FacialHairC") ?? "";
+
+            ColorEstimate = await LocalStorage.GetItemAsync<string>("ColorEstimate") ?? "Not yet estimated";
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+    }
+
+}

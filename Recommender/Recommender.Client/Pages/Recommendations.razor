@@ -1,0 +1,167 @@
+﻿@page "/recommendations"
+@using System.Text
+@using System.Text.Json
+@using Recommender.Client.DTOs
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@inject NotificationService NotificationService
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Http
+
+
+<RadzenText TextStyle="TextStyle.H3">Recommendations</RadzenText>
+
+<RadzenColumn>
+     <RadzenStack>
+        <RadzenRow>
+            <RadzenColumn SizeMD="12">
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H5">Color Estimate</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1">@ColorEstimate</RadzenText>
+                </RadzenCard>
+            </RadzenColumn>
+        </RadzenRow>
+        <RadzenRow>
+            <RadzenColumn Size="12" SizeSM="6">
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H6">Body Estimate</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body2">@BodyEstimate</RadzenText>
+                </RadzenCard>
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeSM="6">
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H6">Face Estimate</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body2">@FaceEstimate</RadzenText>
+                </RadzenCard>
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenStack>
+</RadzenColumn>
+
+<RadzenRow Gap="1rem" Size="12" class="rz-my-10">
+    <RadzenColumn Size="12">
+        <RadzenStack>
+            <RadzenButton Click=@(args => GenerateReccommendationsAsync()) Text="Generate" ButtonStyle="ButtonStyle.Primary" />
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
+
+<RadzenRow Gap="1rem" Size="12">
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenStack>
+            <RadzenCard>
+                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+            </RadzenCard>
+            <RadzenCard>
+                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+            </RadzenCard>
+        </RadzenStack>
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenStack>
+            <RadzenCard>
+                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+            </RadzenCard>
+            <RadzenCard>
+                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+            </RadzenCard>
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenComponents />
+
+@code {
+    //General
+    int Age = 0;
+    string Gender = "";
+
+    //Face
+    int ForeheadW = 0;
+    int CheekboneW = 0;
+    int JawW = 0;
+    int FaceH = 0;
+    string ChinT = "";
+    string FaceEstimate = "Not yet estimated";
+
+    //Body
+    int ShoulderW = 0;
+    int BustW = 0;
+    int WaistW = 0;
+    int HighHipW = 0;
+    int HipW = 0;
+    string BodyEstimate = "Not yet estimated";
+
+    //Color
+    string ForeheadC = "";
+    string EyeC = "";
+    string HairC = "";
+    string FacialHairC = "";
+    string ColorEstimate = "Not yet estimated";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    string openaitest = "-";
+
+    private async Task GenerateReccommendationsAsync()
+    {
+        try
+        {
+            
+            var output = new PromptDTO("Test");
+
+            openaitest = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+            ColorEstimate = openaitest;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+        finally
+        {
+            Console.WriteLine(openaitest);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = openaitest, Duration = 4000 });
+        }
+
+        
+    }
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            Age = await LocalStorage.GetItemAsync<int>("Age");
+            Gender = await LocalStorage.GetItemAsync<string>("Gender") ?? "";
+
+            ForeheadW = await LocalStorage.GetItemAsync<int>("ForeheadW");
+            CheekboneW = await LocalStorage.GetItemAsync<int>("CheekboneW");
+            JawW = await LocalStorage.GetItemAsync<int>("JawW");
+            FaceH = await LocalStorage.GetItemAsync<int>("FaceH");
+            ChinT = await LocalStorage.GetItemAsync<string>("ChinT") ?? "";
+            FaceEstimate = await LocalStorage.GetItemAsync<string>("FaceEstimate") ?? "Not yet estimated";
+            
+            ShoulderW = await LocalStorage.GetItemAsync<int>("ShoulderW");
+            BustW = await LocalStorage.GetItemAsync<int>("BustW");
+            WaistW = await LocalStorage.GetItemAsync<int>("WaistW");
+            HighHipW = await LocalStorage.GetItemAsync<int>("HighHipW");
+            HipW = await LocalStorage.GetItemAsync<int>("HipW");
+            BodyEstimate = await LocalStorage.GetItemAsync<string>("BodyEstimate") ?? "Not yet estimated";
+
+            ForeheadC = await LocalStorage.GetItemAsync<string>("ForeheadC") ?? "";
+            EyeC = await LocalStorage.GetItemAsync<string>("EyeC") ?? "";
+            HairC = await LocalStorage.GetItemAsync<string>("HairC") ?? "";
+            FacialHairC = await LocalStorage.GetItemAsync<string>("FacialHairC") ?? "";
+            ColorEstimate = await LocalStorage.GetItemAsync<string>("ColorEstimate") ?? "Not yet estimated";
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+    }
+}

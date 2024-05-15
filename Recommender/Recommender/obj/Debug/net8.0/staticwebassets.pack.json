@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\BruncsicsBálint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Recommender.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Recommender.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\BruncsicsBálint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\BruncsicsBálint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\BruncsicsBálint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\BruncsicsBálint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Recommender.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Recommender.props",
+      "PackagePath": "build\\Recommender.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Recommender.props",
+      "PackagePath": "buildMultiTargeting\\Recommender.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Recommender.props",
+      "PackagePath": "buildTransitive\\Recommender.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

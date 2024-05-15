@@ -1,0 +1,96 @@
+﻿@page "/body"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@inject NotificationService NotificationService
+@inject ILocalStorageService LocalStorage
+
+<RadzenText TextStyle="TextStyle.H3">Body</RadzenText>
+<RadzenRow Gap="1rem">
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenStack>
+
+            <RadzenFormField Text="Shoulder Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@ShoulderW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Bust Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@BustW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Waist Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@WaistW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="High Hip Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@HighHipW" />
+            </RadzenFormField>
+
+            <RadzenFormField Text="Hip Width" Variant="Variant.Flat">
+                <RadzenNumeric @bind-Value="@HipW" />
+            </RadzenFormField>
+
+            <RadzenButton Click=@(args => SaveChangesAsync()) Text="Save and Estimate" ButtonStyle="ButtonStyle.Primary" />
+
+        </RadzenStack>
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeSM="6">
+        <RadzenCard>
+            <RadzenText TextStyle="TextStyle.H3">Result</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">Your result is:</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1">@BodyEstimate</RadzenText>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenComponents />
+
+@code {
+    int ShoulderW = 0;
+    int BustW = 0;
+    int WaistW = 0;
+    int HighHipW = 0;
+    int HipW = 0;
+
+    string BodyEstimate = "Not yet estimated";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task SaveChangesAsync()
+    {
+        try
+        {
+            await LocalStorage.SetItemAsync("ShoulderW", ShoulderW);
+            await LocalStorage.SetItemAsync("BustW", BustW);
+            await LocalStorage.SetItemAsync("WaistW", WaistW);
+            await LocalStorage.SetItemAsync("HighHipW", HighHipW);
+            await LocalStorage.SetItemAsync("HipW", HipW);
+
+            BodyEstimate = "Your result is: " + ShoulderW + " " + BustW + " " + WaistW + " " + HighHipW + " " + HipW;
+            await LocalStorage.SetItemAsync("BodyEstimate", BodyEstimate);
+        }catch(Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+    }
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            ShoulderW = await LocalStorage.GetItemAsync<int>("ShoulderW");
+            BustW = await LocalStorage.GetItemAsync<int>("BustW");
+            WaistW = await LocalStorage.GetItemAsync<int>("WaistW");
+            HighHipW = await LocalStorage.GetItemAsync<int>("HighHipW");
+            HipW = await LocalStorage.GetItemAsync<int>("HipW");
+            
+            BodyEstimate = await LocalStorage.GetItemAsync<string>("BodyEstimate") ?? "Not yet estimated";
+        }catch(Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+    }
+
+}

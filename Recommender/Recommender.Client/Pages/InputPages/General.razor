@@ -1,0 +1,60 @@
+﻿@page "/general"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@inject NotificationService NotificationService
+@inject ILocalStorageService LocalStorage
+
+<RadzenText TextStyle="TextStyle.H3">General</RadzenText>
+<RadzenRow Gap="1rem">
+    <RadzenColumn>
+        <RadzenStack>
+            <RadzenFormField Text="Gender" Variant="Variant.Flat" Size="12" SizeSM="6">
+                <RadzenDropDown Data=@Genders @bind-Value="@Gender" />
+            </RadzenFormField>
+            <RadzenFormField Text="Age" Variant="Variant.Flat" Size="12" SizeSM="6">
+                <RadzenNumeric @bind-Value="@Age" />
+            </RadzenFormField>
+            <RadzenButton Click=@(args => SaveChangesAsync()) Text="Save" ButtonStyle="ButtonStyle.Primary" />
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
+<RadzenComponents />
+
+@code {
+    int Age = 0;
+    string Gender = "";
+    string[] Genders = [ "Male", "Female", "Other"];
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task SaveChangesAsync()
+    {
+        try
+        {
+            await LocalStorage.SetItemAsync("Age", Age);
+            await LocalStorage.SetItemAsync("Gender", Gender);
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+    }
+
+    private async Task LoadDataAsync()
+    {
+        try
+        {
+            Age = await LocalStorage.GetItemAsync<int>("Age");
+            Gender = await LocalStorage.GetItemAsync<string>("Gender") ?? "";
+        }
+        catch (Exception ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+    }
+}
