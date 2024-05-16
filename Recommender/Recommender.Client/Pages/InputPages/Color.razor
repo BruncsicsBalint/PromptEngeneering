@@ -1,7 +1,9 @@
 ﻿@page "/color"
+@using Recommender.Client.DTOs
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 @inject NotificationService NotificationService
 @inject ILocalStorageService LocalStorage
+@inject HttpClient Http
 
 <RadzenText TextStyle="TextStyle.H3">Color</RadzenText>
 <RadzenRow Gap="1rem">
@@ -24,8 +26,8 @@
     </RadzenColumn>
     <RadzenColumn Size="12" SizeSM="6">
         <RadzenCard>
-            <RadzenText TextStyle="TextStyle.H3">Result</RadzenText>
-            <RadzenText TextStyle="TextStyle.H4">Your result is:</RadzenText>
+            <RadzenText TextStyle="TextStyle.H3">@ShortColorEstimate</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">Description:</RadzenText>
             <RadzenText TextStyle="TextStyle.Body1">@ColorEstimate</RadzenText>
         </RadzenCard>
     </RadzenColumn>
@@ -39,10 +41,46 @@
     string FacialHairC = "";
 
     string ColorEstimate = "Not yet estimated";
+    string ShortColorEstimate = "Estimate";
 
     protected override async Task OnInitializedAsync()
     {
         await LoadDataAsync();
+    }
+
+    private async Task<string> MakePrompt()
+    {
+        PromptDTO output = new PromptDTO($@"
+Given the following color measurements of an individual:
+- Forehead Color: {ForeheadC}
+- Eye Color: {EyeC}
+- Hair Color: {HairC}
+- Facial Hair Color: {FacialHairC}
+
+Evaluate the skin undertone based on these colors and provide relevant style tips. The skin undertones are:
+1. Warm: Characterized by golden, peachy, or yellow hues. Tips: Wear earth tones, warm reds, and olive greens.
+2. Cool: Marked by pink, red, or blue hues. Tips: Opt for cool blues, emerald greens, and pure whites.
+3. Neutral: A balance of warm and cool hues. Tips: Try subdued colors like off-whites and soft greys.
+
+After determining the undertone, identify the seasonal color type and provide style tips. The types are:
+- Spring: Fresh, warm, and bright. Tips: Embrace warm colors like peach, coral, and golden yellow.
+- Summer: Soft, cool, and muted. Tips: Favor soft blues, lavenders, and cool greys.
+- Autumn: Rich, warm, and earthy. Tips: Choose colors like olive, dark brown, and mustard.
+- Winter: Bold, cool, and intense. Tips: Go for bold and saturated colors like navy blue, true red, and icy pastels.
+
+Use maximum of 90 words!
+");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
+    }
+
+    private async Task<string> GetShortDescription()
+    {
+        PromptDTO output = new PromptDTO($"{ColorEstimate}, From this in a single word what is the skin undertone? Also with a single word what is the seasonal color type. Use this format: [Undertone]/[SeasoneColor]");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
     }
 
     private async Task SaveChangesAsync()
@@ -54,15 +92,18 @@
             await LocalStorage.SetItemAsync("HairC", HairC);
             await LocalStorage.SetItemAsync("FacialHairC", FacialHairC);
             
-            ColorEstimate = "Your result is: " + ForeheadC + " " + EyeC + " " + HairC + " " + FacialHairC;
+            ColorEstimate = await MakePrompt();
             await LocalStorage.SetItemAsync("ColorEstimate", ColorEstimate);
+
+            ShortColorEstimate = await GetShortDescription();
+            await LocalStorage.SetItemAsync("ShortColorEstimate", ShortColorEstimate);
         }
         catch (Exception ex)
         {
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
         }
 
-        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Success", Detail = "Saved and Generated", Duration = 4000 });
     }
 
     private async Task LoadDataAsync()
@@ -75,6 +116,7 @@
             FacialHairC = await LocalStorage.GetItemAsync<string>("FacialHairC") ?? "";
 
             ColorEstimate = await LocalStorage.GetItemAsync<string>("ColorEstimate") ?? "Not yet estimated";
+            ShortColorEstimate = await LocalStorage.GetItemAsync<string>("ShortColorEstimate") ?? "Estimate";
         }
         catch (Exception ex)
         {

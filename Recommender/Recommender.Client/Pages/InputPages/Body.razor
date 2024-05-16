@@ -1,7 +1,9 @@
 ﻿@page "/body"
+@using Recommender.Client.DTOs
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 @inject NotificationService NotificationService
 @inject ILocalStorageService LocalStorage
+@inject HttpClient Http
 
 <RadzenText TextStyle="TextStyle.H3">Body</RadzenText>
 <RadzenRow Gap="1rem">
@@ -34,8 +36,8 @@
     </RadzenColumn>
     <RadzenColumn Size="12" SizeSM="6">
         <RadzenCard>
-            <RadzenText TextStyle="TextStyle.H3">Result</RadzenText>
-            <RadzenText TextStyle="TextStyle.H4">Your result is:</RadzenText>
+            <RadzenText TextStyle="TextStyle.H3">@ShortBodyEstimate</RadzenText>
+            <RadzenText TextStyle="TextStyle.H4">Description:</RadzenText>
             <RadzenText TextStyle="TextStyle.Body1">@BodyEstimate</RadzenText>
         </RadzenCard>
     </RadzenColumn>
@@ -50,10 +52,44 @@
     int HipW = 0;
 
     string BodyEstimate = "Not yet estimated";
+    string ShortBodyEstimate = "Estimate";
 
     protected override async Task OnInitializedAsync()
     {
         await LoadDataAsync();
+    }
+
+    private async Task<string> MakePrompt()
+    {
+        PromptDTO output = new PromptDTO($@"
+Given the following body measurements:
+- Shoulder Width: {ShoulderW} cm
+- Bust Width: {BustW} cm
+- Waist Width: {WaistW} cm
+- High Hip Width: {HighHipW} cm
+- Hip Width: {HipW} cm
+
+Determine the body type and provide relevant style tips. The types are:
+1. Hourglass: Well-defined waist, chest and hips approximately equal. Tips: Emphasize waist, dresses that cinch at the middle.
+2. Bottom Hourglass: Like the hourglass but with slightly wider hips. Tips: Highlight lower body, structured tops, wide necklines.
+3. Top Hourglass: Larger bust compared to hips, well-defined waist. Tips: V-neck tops, avoid adding volume to upper body.
+4. Spoon (Pear): Hips significantly larger than bust, defined waist. Tips: Bold patterns on tops, solid darker colors for lower body.
+5. Triangle: Hips wider than chest, less defined waist. Tips: Bright colors or embellishments on tops, A-line skirts.
+6. Inverted Triangle: Broad chest, narrower hips. Tips: Patterned pants, full skirts to add volume below.
+7. Rectangle: Hips, waist, and chest roughly the same width. Tips: Define waist, wrap dresses, belted coats.
+
+Use maximum of 90 words!");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
+    }
+
+    private async Task<string> GetShortDescription()
+    {
+        PromptDTO output = new PromptDTO($"{BodyEstimate}, From this in a single word what is the body type?");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
     }
 
     private async Task SaveChangesAsync()
@@ -66,14 +102,18 @@
             await LocalStorage.SetItemAsync("HighHipW", HighHipW);
             await LocalStorage.SetItemAsync("HipW", HipW);
 
-            BodyEstimate = "Your result is: " + ShoulderW + " " + BustW + " " + WaistW + " " + HighHipW + " " + HipW;
+
+            BodyEstimate = await MakePrompt();
             await LocalStorage.SetItemAsync("BodyEstimate", BodyEstimate);
+
+            ShortBodyEstimate = await GetShortDescription();
+            await LocalStorage.SetItemAsync("ShortBodyEstimate", ShortBodyEstimate);
         }catch(Exception ex)
         {
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
         }
 
-        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Success", Detail = "Saved and Generated", Duration = 4000 });
     }
 
     private async Task LoadDataAsync()
@@ -87,6 +127,7 @@
             HipW = await LocalStorage.GetItemAsync<int>("HipW");
             
             BodyEstimate = await LocalStorage.GetItemAsync<string>("BodyEstimate") ?? "Not yet estimated";
+            ShortBodyEstimate = await LocalStorage.GetItemAsync<string>("ShortBodyEstimate") ?? "Estimate";
         }catch(Exception ex)
         {
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });

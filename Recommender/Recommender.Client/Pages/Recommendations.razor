@@ -15,7 +15,7 @@
         <RadzenRow>
             <RadzenColumn SizeMD="12">
                 <RadzenCard>
-                    <RadzenText TextStyle="TextStyle.H5">Color Estimate</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H5">Color Type Estimate: @ShortColorEstimate</RadzenText>
                     <RadzenText TextStyle="TextStyle.Body1">@ColorEstimate</RadzenText>
                 </RadzenCard>
             </RadzenColumn>
@@ -23,13 +23,13 @@
         <RadzenRow>
             <RadzenColumn Size="12" SizeSM="6">
                 <RadzenCard>
-                    <RadzenText TextStyle="TextStyle.H6">Body Estimate</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H6">Body Type Estimate: @ShortBodyEstimate</RadzenText>
                     <RadzenText TextStyle="TextStyle.Body2">@BodyEstimate</RadzenText>
                 </RadzenCard>
             </RadzenColumn>
             <RadzenColumn Size="12" SizeSM="6">
                 <RadzenCard>
-                    <RadzenText TextStyle="TextStyle.H6">Face Estimate</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H6">Face Type Estimate: @ShortFaceEstimate</RadzenText>
                     <RadzenText TextStyle="TextStyle.Body2">@FaceEstimate</RadzenText>
                 </RadzenCard>
             </RadzenColumn>
@@ -49,24 +49,24 @@
     <RadzenColumn Size="12" SizeSM="6">
         <RadzenStack>
             <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+                <RadzenText TextStyle="TextStyle.H3">Clothing</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">@Clothing</RadzenText>
             </RadzenCard>
             <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+                <RadzenText TextStyle="TextStyle.H3">Makeup</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">@Makeup</RadzenText>
             </RadzenCard>
         </RadzenStack>
     </RadzenColumn>
     <RadzenColumn Size="12" SizeSM="6">
         <RadzenStack>
             <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+                <RadzenText TextStyle="TextStyle.H3">Eyeware and Accessories</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">@EyewareAndAccessories</RadzenText>
             </RadzenCard>
             <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">General</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </RadzenText>
+                <RadzenText TextStyle="TextStyle.H3">Hair</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1">@Hair</RadzenText>
             </RadzenCard>
         </RadzenStack>
     </RadzenColumn>
@@ -85,6 +85,7 @@
     int FaceH = 0;
     string ChinT = "";
     string FaceEstimate = "Not yet estimated";
+    string ShortFaceEstimate = "";
 
     //Body
     int ShoulderW = 0;
@@ -93,6 +94,7 @@
     int HighHipW = 0;
     int HipW = 0;
     string BodyEstimate = "Not yet estimated";
+    string ShortBodyEstimate = "";
 
     //Color
     string ForeheadC = "";
@@ -100,36 +102,43 @@
     string HairC = "";
     string FacialHairC = "";
     string ColorEstimate = "Not yet estimated";
+    string ShortColorEstimate = "";
+
+    //Recommendations
+    string Clothing = "Not yet estimated";
+    string EyewareAndAccessories = "Not yet estimated";
+    string Makeup = "Not yet estimated";
+    string Hair = "Not yet estimated";
 
     protected override async Task OnInitializedAsync()
     {
         await LoadDataAsync();
     }
 
-    string openaitest = "-";
-
     private async Task GenerateReccommendationsAsync()
     {
         try
         {
-            
-            var output = new PromptDTO("Test");
 
-            openaitest = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
-            ColorEstimate = openaitest;
+            Clothing = await clothing();
+            await LocalStorage.SetItemAsync("Clothing", Clothing);
+
+            EyewareAndAccessories = await eyewareAndAccessories();
+            await LocalStorage.SetItemAsync("EyewareAndAccessories", EyewareAndAccessories);
+
+            Makeup = await makeup();
+            await LocalStorage.SetItemAsync("Makeup", Makeup);
+
+            Hair = await hair();
+            await LocalStorage.SetItemAsync("Hair", Hair);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
         }
-        finally
-        {
-            Console.WriteLine(openaitest);
-            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = openaitest, Duration = 4000 });
-        }
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Generated", Duration = 4000 });
 
-        
     }
 
     private async Task LoadDataAsync()
@@ -145,23 +154,70 @@
             FaceH = await LocalStorage.GetItemAsync<int>("FaceH");
             ChinT = await LocalStorage.GetItemAsync<string>("ChinT") ?? "";
             FaceEstimate = await LocalStorage.GetItemAsync<string>("FaceEstimate") ?? "Not yet estimated";
-            
+            ShortFaceEstimate = await LocalStorage.GetItemAsync<string>("ShortFaceEstimate") ?? "";
+
             ShoulderW = await LocalStorage.GetItemAsync<int>("ShoulderW");
             BustW = await LocalStorage.GetItemAsync<int>("BustW");
             WaistW = await LocalStorage.GetItemAsync<int>("WaistW");
             HighHipW = await LocalStorage.GetItemAsync<int>("HighHipW");
             HipW = await LocalStorage.GetItemAsync<int>("HipW");
             BodyEstimate = await LocalStorage.GetItemAsync<string>("BodyEstimate") ?? "Not yet estimated";
+            ShortBodyEstimate = await LocalStorage.GetItemAsync<string>("ShortBodyEstimate") ?? "";
 
             ForeheadC = await LocalStorage.GetItemAsync<string>("ForeheadC") ?? "";
             EyeC = await LocalStorage.GetItemAsync<string>("EyeC") ?? "";
             HairC = await LocalStorage.GetItemAsync<string>("HairC") ?? "";
             FacialHairC = await LocalStorage.GetItemAsync<string>("FacialHairC") ?? "";
             ColorEstimate = await LocalStorage.GetItemAsync<string>("ColorEstimate") ?? "Not yet estimated";
+            ShortColorEstimate = await LocalStorage.GetItemAsync<string>("ShortColorEstimate") ?? "";
+
+            Clothing = await LocalStorage.GetItemAsync<string>("Clothing") ?? "Not yet estimated";
+            EyewareAndAccessories = await LocalStorage.GetItemAsync<string>("EyewareAndAccessories") ?? "Not yet estimated";
+            Makeup = await LocalStorage.GetItemAsync<string>("Makeup") ?? "Not yet estimated";
+            Hair = await LocalStorage.GetItemAsync<string>("Hair") ?? "Not yet estimated";
         }
         catch (Exception ex)
         {
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
         }
+    }
+
+    private async Task<string> clothing(){
+        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Based on the input: ColorType is {ShortColorEstimate}:{ColorEstimate}, BodyType is {ShortBodyEstimate}:{BodyEstimate}, FaceType is {ShortFaceEstimate}:{FaceEstimate}{genderInput}{ageInput}. Recommend clothing choices focusing on fabric type, color choices, pattern recommendations, fit and cut, size recommendations, layering techniques, and trend updates. Use maximum of 70 words!");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
+    }
+
+    private async Task<string> eyewareAndAccessories()
+    {
+        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Given the individual's FaceType as {ShortFaceEstimate}:{FaceEstimate}, and ColorType as {ShortColorEstimate}:{ColorEstimate}{genderInput}{ageInput}, advise on whether glasses or contact lenses are more suitable. Detail the recommended frame type, material, color, size, shape, and if sunglasses, the lens color. Additionally, suggest accessories including types of jewelry, bags, shoes, and watches that complement the BodyType {ShortBodyEstimate}:{BodyEstimate} and previously mentioned colortype. Use maximum of 70 words!");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
+    }
+
+    private async Task<string> makeup()
+    {
+        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Based on the FaceType {ShortFaceEstimate}:{FaceEstimate}, ColorType {ShortColorEstimate}:{ColorEstimate}, and BodyType {ShortBodyEstimate}:{BodyEstimate}{genderInput}{ageInput}, provide detailed makeup recommendations. Include choices for lipstick, eyeshadow, eyeliner, mascara, blush, bronzer, highlighter, and foundation. Highlight shades, finishes, and application techniques that complement their overall appearance and enhance their features. Use maximum of 70 words!");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
+    }
+
+    private async Task<string> hair()
+    {
+        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Provide hairstyle recommendations for an individual with FaceType {ShortFaceEstimate}:{FaceEstimate}, ColorType {ShortColorEstimate}:{ColorEstimate}, and BodyType {ShortBodyEstimate}:{BodyEstimate}{genderInput}{ageInput}. Include suggestions for hair length, haircut styles, hair texture techniques, and coloring options that would best suit their face shape and enhance their overall style. Emphasize the coordination with their seasonal color type and any particular features to highlight or soften. Use maximum of 70 words!");
+
+        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+        return result;
     }
 }

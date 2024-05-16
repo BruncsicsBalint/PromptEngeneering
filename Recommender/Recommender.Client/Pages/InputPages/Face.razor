@@ -77,7 +77,9 @@ Determine the face type and provide relevant style tips. The types are:
 3. Heart Face: Wider at the forehead, narrowing down towards a pointed chin. High cheekbones and a delicate jawline. Tips: Hairstyles wider at the jawline, rounded glasses.
 4. Square Face: Strong, angular jawline; forehead, cheekbones, and jawline of approximately the same width. Tips: Hairstyles that soften the angles, curls or waves, rounded or oval glasses.
 5. Triangle Face: Jawline wider than the cheekbones, narrow forehead. Tips: Adding volume at the top of the head, high arched eyebrows.
-6. Diamond Face: High cheekbones, narrow forehead and jawline of approximately the same width. Tips: Hairstyles that add width at the chin, soft bangs."
+6. Diamond Face: High cheekbones, narrow forehead and jawline of approximately the same width. Tips: Hairstyles that add width at the chin, soft bangs.
+
+Use maximum of 90 words!"
 );
 
         var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
@@ -86,7 +88,7 @@ Determine the face type and provide relevant style tips. The types are:
 
     private async Task<string> GetShortDescription()
     {
-        PromptDTO output = new PromptDTO($"{FaceEstimate}, From this in a single word what is the face type?");
+        PromptDTO output = new PromptDTO($"{FaceEstimate}, From this in a single word what is the face type? Dont put any ");
 
         var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
         return result;
@@ -113,7 +115,7 @@ Determine the face type and provide relevant style tips. The types are:
             NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
         }
 
-        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Saved", Duration = 4000 });
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Success", Detail = "Saved and Generated", Duration = 4000 });
     }
 
     private async Task LoadDataAsync()
@@ -127,6 +129,7 @@ Determine the face type and provide relevant style tips. The types are:
             ChinT = await LocalStorage.GetItemAsync<string>("ChinT") ?? "";
 
             FaceEstimate = await LocalStorage.GetItemAsync<string>("FaceEstimate") ?? "Not yet estimated";
+            ShortFaceEstimate = await LocalStorage.GetItemAsync<string>("ShortFaceEstimate") ?? "Estimate";
         }
         catch (Exception ex)
         {

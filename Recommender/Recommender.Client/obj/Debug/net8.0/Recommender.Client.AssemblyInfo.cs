@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Recommender.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f14b907d517a0ff9a7b83ba008cb064e5076ef3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cfdce213830d146b839117634e4258354decb9d6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Recommender.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Recommender.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
