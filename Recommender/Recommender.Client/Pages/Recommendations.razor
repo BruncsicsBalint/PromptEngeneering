@@ -8,69 +8,75 @@
 @inject HttpClient Http
 
 
-<RadzenText TextStyle="TextStyle.H3">Recommendations</RadzenText>
-
-<RadzenColumn>
-     <RadzenStack>
-        <RadzenRow>
-            <RadzenColumn SizeMD="12">
-                <RadzenCard>
-                    <RadzenText TextStyle="TextStyle.H5">Color Type Estimate: @ShortColorEstimate</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Body1">@ColorEstimate</RadzenText>
-                </RadzenCard>
-            </RadzenColumn>
-        </RadzenRow>
-        <RadzenRow>
-            <RadzenColumn Size="12" SizeSM="6">
-                <RadzenCard>
-                    <RadzenText TextStyle="TextStyle.H6">Body Type Estimate: @ShortBodyEstimate</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Body2">@BodyEstimate</RadzenText>
-                </RadzenCard>
-            </RadzenColumn>
-            <RadzenColumn Size="12" SizeSM="6">
-                <RadzenCard>
-                    <RadzenText TextStyle="TextStyle.H6">Face Type Estimate: @ShortFaceEstimate</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Body2">@FaceEstimate</RadzenText>
-                </RadzenCard>
-            </RadzenColumn>
-        </RadzenRow>
-    </RadzenStack>
-</RadzenColumn>
-
-<RadzenRow Gap="1rem" Size="12" class="rz-my-10">
-    <RadzenColumn Size="12">
-        <RadzenStack>
-            <RadzenButton Click=@(args => GenerateReccommendationsAsync()) Text="Generate" ButtonStyle="ButtonStyle.Primary" />
+<RadzenText TextStyle="TextStyle.H2">Recommendations</RadzenText>
+<RadzenStack>
+    <RadzenText TextStyle="TextStyle.H4">Data</RadzenText>
+    <RadzenColumn>
+         <RadzenStack>
+            <RadzenRow>
+                <RadzenColumn SizeMD="12">
+                    <RadzenCard>
+                        <RadzenText TextStyle="TextStyle.H5">Color Type Estimate: @ShortColorEstimate</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1">@ColorEstimate</RadzenText>
+                    </RadzenCard>
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow>
+                <RadzenColumn Size="12" SizeSM="6">
+                    <RadzenCard>
+                        <RadzenText TextStyle="TextStyle.H6">Body Type Estimate: @ShortBodyEstimate</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body2">@BodyEstimate</RadzenText>
+                    </RadzenCard>
+                </RadzenColumn>
+                <RadzenColumn Size="12" SizeSM="6">
+                    <RadzenCard>
+                        <RadzenText TextStyle="TextStyle.H6">Face Type Estimate: @ShortFaceEstimate</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body2">@FaceEstimate</RadzenText>
+                    </RadzenCard>
+                </RadzenColumn>
+            </RadzenRow>
         </RadzenStack>
     </RadzenColumn>
-</RadzenRow>
-
-<RadzenRow Gap="1rem" Size="12">
-    <RadzenColumn Size="12" SizeSM="6">
-        <RadzenStack>
-            <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">Clothing</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">@Clothing</RadzenText>
-            </RadzenCard>
-            <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">Makeup</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">@Makeup</RadzenText>
-            </RadzenCard>
-        </RadzenStack>
-    </RadzenColumn>
-    <RadzenColumn Size="12" SizeSM="6">
-        <RadzenStack>
-            <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">Eyeware and Accessories</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">@EyewareAndAccessories</RadzenText>
-            </RadzenCard>
-            <RadzenCard>
-                <RadzenText TextStyle="TextStyle.H3">Hair</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1">@Hair</RadzenText>
-            </RadzenCard>
-        </RadzenStack>
-    </RadzenColumn>
-</RadzenRow>
+    <RadzenText TextStyle="TextStyle.H4">Generated Recommendations</RadzenText>
+    <RadzenRow Gap="1rem" Size="12">
+        <RadzenColumn Size="12" SizeSM="6">
+            <RadzenStack>
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H3">Clothing</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1">@Clothing</RadzenText>
+                    <RadzenStack>
+                        <RadzenButton Click=@(args => clothing()) Text="Generate" ButtonStyle="ButtonStyle.Primary" />
+                    </RadzenStack>
+                </RadzenCard>
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H3">Makeup</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1">@Makeup</RadzenText>
+                    <RadzenStack>
+                        <RadzenButton Click=@(args => makeup()) Text="Generate" ButtonStyle="ButtonStyle.Primary" />
+                    </RadzenStack>
+                </RadzenCard>
+            </RadzenStack>
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeSM="6">
+            <RadzenStack>
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H3">Eyeware and Accessories</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1">@EyewareAndAccessories</RadzenText>
+                    <RadzenStack>
+                        <RadzenButton Click=@(args => eyewareAndAccessories()) Text="Generate" ButtonStyle="ButtonStyle.Primary" />
+                    </RadzenStack>
+                </RadzenCard>
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.H3">Hair</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1">@Hair</RadzenText>
+                    <RadzenStack>
+                        <RadzenButton Click=@(args => hair()) Text="Generate" ButtonStyle="ButtonStyle.Primary" />
+                    </RadzenStack>
+                </RadzenCard>
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenStack>
 <RadzenComponents />
 
 @code {
@@ -115,32 +121,6 @@
         await LoadDataAsync();
     }
 
-    private async Task GenerateReccommendationsAsync()
-    {
-        try
-        {
-
-            Clothing = await clothing();
-            await LocalStorage.SetItemAsync("Clothing", Clothing);
-
-            EyewareAndAccessories = await eyewareAndAccessories();
-            await LocalStorage.SetItemAsync("EyewareAndAccessories", EyewareAndAccessories);
-
-            Makeup = await makeup();
-            await LocalStorage.SetItemAsync("Makeup", Makeup);
-
-            Hair = await hair();
-            await LocalStorage.SetItemAsync("Hair", Hair);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
-        }
-        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Generated", Duration = 4000 });
-
-    }
-
     private async Task LoadDataAsync()
     {
         try
@@ -182,42 +162,86 @@
         }
     }
 
-    private async Task<string> clothing(){
-        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
-        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
-        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Based on the input: ColorType is {ShortColorEstimate}:{ColorEstimate}, BodyType is {ShortBodyEstimate}:{BodyEstimate}, FaceType is {ShortFaceEstimate}:{FaceEstimate}{genderInput}{ageInput}. Recommend clothing choices focusing on fabric type, color choices, pattern recommendations, fit and cut, size recommendations, layering techniques, and trend updates. Use maximum of 70 words!");
+    private async Task clothing(){
+        try
+        {
+            string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+            string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+            PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Based on the input: ColorType is {ShortColorEstimate}:{ColorEstimate}, BodyType is {ShortBodyEstimate}:{BodyEstimate}, FaceType is {ShortFaceEstimate}:{FaceEstimate}{genderInput}{ageInput}. Recommend clothing choices focusing on fabric type, color choices, pattern recommendations, fit and cut, size recommendations, layering techniques, and trend updates. Use maximum of 70 words!");
 
-        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
-        return result;
+            var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+
+            Clothing = result;
+            await LocalStorage.SetItemAsync("Clothing", Clothing);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Generated", Duration = 4000 });
     }
 
-    private async Task<string> eyewareAndAccessories()
+    private async Task eyewareAndAccessories()
     {
-        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
-        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
-        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Given the individual's FaceType as {ShortFaceEstimate}:{FaceEstimate}, and ColorType as {ShortColorEstimate}:{ColorEstimate}{genderInput}{ageInput}, advise on whether glasses or contact lenses are more suitable. Detail the recommended frame type, material, color, size, shape, and if sunglasses, the lens color. Additionally, suggest accessories including types of jewelry, bags, shoes, and watches that complement the BodyType {ShortBodyEstimate}:{BodyEstimate} and previously mentioned colortype. Use maximum of 70 words!");
+        try
+        {
+            string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+            string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+            PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Given the individual's FaceType as {ShortFaceEstimate}:{FaceEstimate}, and ColorType as {ShortColorEstimate}:{ColorEstimate}{genderInput}{ageInput}, advise on whether glasses or contact lenses are more suitable. Detail the recommended frame type, material, color, size, shape, and if sunglasses, the lens color. Additionally, suggest accessories including types of jewelry, bags, shoes, and watches that complement the BodyType {ShortBodyEstimate}:{BodyEstimate} and previously mentioned colortype. Use maximum of 70 words!");
 
-        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
-        return result;
+            var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+
+            EyewareAndAccessories = result;
+            await LocalStorage.SetItemAsync("EyewareAndAccessories", EyewareAndAccessories);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Generated", Duration = 4000 });
     }
 
-    private async Task<string> makeup()
+    private async Task makeup()
     {
-        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
-        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
-        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Based on the FaceType {ShortFaceEstimate}:{FaceEstimate}, ColorType {ShortColorEstimate}:{ColorEstimate}, and BodyType {ShortBodyEstimate}:{BodyEstimate}{genderInput}{ageInput}, provide detailed makeup recommendations. Include choices for lipstick, eyeshadow, eyeliner, mascara, blush, bronzer, highlighter, and foundation. Highlight shades, finishes, and application techniques that complement their overall appearance and enhance their features. Use maximum of 70 words!");
+        try
+        {
+            string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+            string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+            PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Based on the FaceType {ShortFaceEstimate}:{FaceEstimate}, ColorType {ShortColorEstimate}:{ColorEstimate}, and BodyType {ShortBodyEstimate}:{BodyEstimate}{genderInput}{ageInput}, provide detailed makeup recommendations. Include choices for lipstick, eyeshadow, eyeliner, mascara, blush, bronzer, highlighter, and foundation. Highlight shades, finishes, and application techniques that complement their overall appearance and enhance their features. Use maximum of 70 words!");
 
-        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
-        return result;
+            var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+            
+            Makeup = result;
+            await LocalStorage.SetItemAsync("Makeup", Makeup);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Generated", Duration = 4000 });
     }
 
-    private async Task<string> hair()
+    private async Task hair()
     {
-        string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
-        string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
-        PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Provide hairstyle recommendations for an individual with FaceType {ShortFaceEstimate}:{FaceEstimate}, ColorType {ShortColorEstimate}:{ColorEstimate}, and BodyType {ShortBodyEstimate}:{BodyEstimate}{genderInput}{ageInput}. Include suggestions for hair length, haircut styles, hair texture techniques, and coloring options that would best suit their face shape and enhance their overall style. Emphasize the coordination with their seasonal color type and any particular features to highlight or soften. Use maximum of 70 words!");
+        try
+        {
+            string genderInput = ((Gender == "") || (Gender == null)) ? "" : (", " + Gender);
+            string ageInput = ((Age == 0) || (Gender == null)) ? "" : (" aged" + Age);
+            PromptDTO output = new PromptDTO($"Compose your asnwer as if you are giving advide to someone! Provide hairstyle recommendations for an individual with FaceType {ShortFaceEstimate}:{FaceEstimate}, ColorType {ShortColorEstimate}:{ColorEstimate}, and BodyType {ShortBodyEstimate}:{BodyEstimate}{genderInput}{ageInput}. Include suggestions for hair length, haircut styles, hair texture techniques, and coloring options that would best suit their face shape and enhance their overall style. Use maximum of 70 words!");
 
-        var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
-        return result;
+            var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
+            
+            Hair = result;
+            await LocalStorage.SetItemAsync("Hair", Hair);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Error", Detail = ex.Message, Duration = 4000 });
+        }
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Successfully Generated", Duration = 4000 });
     }
 }

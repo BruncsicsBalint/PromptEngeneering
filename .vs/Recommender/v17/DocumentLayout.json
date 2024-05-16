@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\inputpages\\face.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\inputpages\\face.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\recommendations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\recommendations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\inputpages\\color.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\inputpages\\color.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E279287-7BEC-4F55-9B98-9595D9318B02}|Recommender\\Recommender\\Recommender.csproj|solutionrelative:recommender\\recommender\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\inputpages\\face.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\inputpages\\face.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\inputpages\\body.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\inputpages\\body.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|c:\\users\\bruncsicsb\u00E1lint\\desktop\\projects\\practice\\recommender\\recommender\\recommender.client\\pages\\inputpages\\color.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3180C047-4DC7-4C6F-82CF-32775F09FE68}|Recommender\\Recommender.Client\\Recommender.Client.csproj|solutionrelative:recommender\\recommender.client\\pages\\inputpages\\color.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,14 +41,46 @@
           "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Recommender\\Recommender\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Recommender\\Recommender\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-16T20:13:47.468Z"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Recommender\\Recommender\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "Recommender\\Recommender\\Components\\Pages\\Home.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-16T19:58:59.241Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\appsettings.json",
               "RelativeDocumentMoniker": "Recommender\\Recommender\\appsettings.json",
               "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender\\appsettings.json",
               "RelativeToolTip": "Recommender\\Recommender\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABEAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-05-16T09:25:20.994Z",
               "EditorCaption": ""
@@ -53,49 +93,46 @@
               "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
               "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
               "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\Recommendations.razor",
-              "ViewState": "AQIAALUAAAAAAAAAAAAYwLsAAADdAQAA",
+              "ViewState": "AQIAAM8AAAAAAAAAAAAAAOgAAADyAQAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-05-16T07:22:24.999Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Color.razor",
               "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Color.razor",
               "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\InputPages\\Color.razor",
               "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Color.razor",
               "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\InputPages\\Color.razor",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAAAGkAAABmAAAA",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAAGkAAABmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-16T06:31:51.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T06:31:51.207Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Body.razor",
               "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Body.razor",
               "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\InputPages\\Body.razor",
               "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Body.razor",
               "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\InputPages\\Body.razor",
-              "ViewState": "AQIAAFYAAAAAAAAAAAAAAHMAAACaAAAA",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAAHMAAACaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-16T06:23:18.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T06:23:18.466Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Face.razor",
               "DocumentMoniker": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
               "RelativeDocumentMoniker": "Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
               "ToolTip": "C:\\Users\\BruncsicsB\u00E1lint\\Desktop\\Projects\\Practice\\Recommender\\Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
               "RelativeToolTip": "Recommender\\Recommender.Client\\Pages\\InputPages\\Face.razor",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAAGIAAAALAAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAFoAAABsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-15T21:44:20.748Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-15T21:44:20.748Z"
             }
           ]
         }

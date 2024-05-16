@@ -88,7 +88,7 @@ Use maximum of 90 words!"
 
     private async Task<string> GetShortDescription()
     {
-        PromptDTO output = new PromptDTO($"{FaceEstimate}, From this in a single word what is the face type? Dont put any ");
+        PromptDTO output = new PromptDTO($"{FaceEstimate}, From this in a single word what is the face type?");
 
         var result = await (await Http.PostAsJsonAsync<PromptDTO>("api/openai/advanced", output)).Content.ReadAsStringAsync();
         return result;
